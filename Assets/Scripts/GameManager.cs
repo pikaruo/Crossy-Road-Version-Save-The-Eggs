@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Player player;
     [SerializeField] GameObject grass;
     [SerializeField] GameObject road;
     [SerializeField] int extent;
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
         // {
         //     Debug.Log(treePos);
         // }
+
+        player.SetUp(minZPos, extent);
 
     }
 

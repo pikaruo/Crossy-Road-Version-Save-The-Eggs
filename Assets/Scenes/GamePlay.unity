@@ -200,8 +200,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677188292}
-  m_LocalRotation: {x: 0.42194986, y: -0.46183744, z: 0.26565987, w: 0.7335457}
-  m_LocalPosition: {x: 4.943993, y: 7.0311723, z: 2.6864622}
+  m_LocalRotation: {x: 0.3095902, y: -0.5101186, z: 0.20344993, w: 0.7762351}
+  m_LocalPosition: {x: 8.590439, y: 11.317648, z: -2.157235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,6 +227,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 69110671530308738, guid: af75acf2a24411b49b81c1f78aa2c946, type: 3}
   m_PrefabInstance: {fileID: 1410989134}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1285228022 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 69110671530308767, guid: af75acf2a24411b49b81c1f78aa2c946, type: 3}
+  m_PrefabInstance: {fileID: 1410989134}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285228020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2564a4f1db7dccc47a849f1535a9030c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1410989134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -422,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7615846745f25849adaf3a84b114a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1285228022}
   grass: {fileID: 5708348161913352809, guid: 2cec7a36b2c8ee94e83f90248deb9cbc, type: 3}
   road: {fileID: 4834863748080147136, guid: e14b8c5645bbe0e489f970c48eb86bed, type: 3}
   extent: 5
