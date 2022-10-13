@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] ParticleSystem dieParticle;
     [SerializeField, Range(0.01f, 1f)] float moveDuration = 0.2f;
     [SerializeField, Range(0.01f, 1f)] float jumpHight = 0.5f;
     private float backBoundary;
@@ -77,16 +78,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (this.enabled == false)
+            return;
+
         // dijalankan sekali pada frame saat bersentuhan
         var car = other.GetComponent<Car>();
         if (car != null)
         {
             AnimateDie(car);
         }
-        if (other.tag == "Car")
-        {
-            // AnimateDie();
-        }
+
+        // if (other.tag == "Car")
+        // {
+        // AnimateDie();
+        // }
     }
 
     private void AnimateDie(Car car)
@@ -102,6 +107,7 @@ public class Player : MonoBehaviour
         transform.DOScaleX(3, 0.2f);
         transform.DOScaleZ(2, 0.2f);
         this.enabled = false;
+        dieParticle.Play();
     }
 
     private void OnTriggerStay(Collider other)
