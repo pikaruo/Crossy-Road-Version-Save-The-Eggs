@@ -2,16 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] TMP_Text stepText;
     [SerializeField] ParticleSystem dieParticle;
     [SerializeField, Range(0.01f, 1f)] float moveDuration = 0.2f;
     [SerializeField, Range(0.01f, 1f)] float jumpHight = 0.5f;
     private float backBoundary;
     private float leftBoundary;
     private float rightBoundary;
+
+    [SerializeField] private int maxTravel;
+    public int MaxTravel { get => maxTravel; }
+    [SerializeField] private int currentTravel;
+    public int CurrentTravel { get => currentTravel; }
+    public bool IsDie { get => this.enabled == false; }
 
     public void SetUp(int minZPos, int extent)
     {
@@ -24,20 +32,20 @@ public class Player : MonoBehaviour
     {
         var moveDir = Vector3.zero;
         // * Maju depan belakang
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             moveDir += new Vector3(0, 0, 1);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             moveDir += new Vector3(0, 0, -1);
         }
         // * Samping kanan kiri
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             moveDir += new Vector3(1, 0, 0);
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow))
         {
             moveDir += new Vector3(-1, 0, 0);
         }
@@ -67,11 +75,22 @@ public class Player : MonoBehaviour
 
         // gerak maju/mundur
         transform.DOMoveX(targetPosition.x, moveDuration);
-        transform.DOMoveZ(targetPosition.z, moveDuration);
+        transform
+        .DOMoveZ(targetPosition.z, moveDuration)
+        .OnComplete(UpdateTravel);
 
     }
 
-    private bool IsJumping()
+    private void UpdateTravel()
+    {
+        currentTravel = (int)this.transform.position.z;
+        if (currentTravel > maxTravel)
+            maxTravel = currentTravel;
+
+        stepText.text = "STEP : " + maxTravel.ToString();
+    }
+
+    public bool IsJumping()
     {
         return DOTween.IsTweening(transform);
     }
@@ -85,7 +104,7 @@ public class Player : MonoBehaviour
         var car = other.GetComponent<Car>();
         if (car != null)
         {
-            AnimateDie(car);
+            AnimateCrash(car);
         }
 
         // if (other.tag == "Car")
@@ -94,7 +113,7 @@ public class Player : MonoBehaviour
         // }
     }
 
-    private void AnimateDie(Car car)
+    private void AnimateCrash(Car car)
     {
         // var isRight = car.transform.rotation.y == 90;
 
