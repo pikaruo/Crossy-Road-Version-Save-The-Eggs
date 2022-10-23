@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  startupSoundEffect: {fileID: 0}
 --- !u!1 &2527121376174374584
 GameObject:
   m_ObjectHideFlags: 0

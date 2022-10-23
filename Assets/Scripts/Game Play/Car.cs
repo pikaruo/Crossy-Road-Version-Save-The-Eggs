@@ -6,6 +6,7 @@ public class Car : MonoBehaviour
 {
     [SerializeField] float speed = 1;
     int extent;
+
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);

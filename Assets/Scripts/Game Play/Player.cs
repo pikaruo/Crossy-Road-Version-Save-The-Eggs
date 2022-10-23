@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     private float leftBoundary;
     private float rightBoundary;
 
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource DieSoundEffect;
+
     [SerializeField] private int maxTravel;
     public int MaxTravel { get => maxTravel; }
     [SerializeField] private int currentTravel;
@@ -51,7 +54,10 @@ public class Player : MonoBehaviour
         }
 
         if (moveDir != Vector3.zero && IsJumping() == false)
+        {
+            jumpSoundEffect.Play();
             Jump(moveDir);
+        }
     }
 
     private void Jump(Vector3 targetDirection)
@@ -122,6 +128,7 @@ public class Player : MonoBehaviour
         //     .DORotate(Vector3.forward * 360, 1f)
         //     .SetLoops(10, LoopType.Restart);
         // Gepeng
+        DieSoundEffect.Play();
         transform.DOScaleY(0.2f, 0.2f);
         transform.DOScaleX(3, 0.2f);
         transform.DOScaleZ(2, 0.2f);
